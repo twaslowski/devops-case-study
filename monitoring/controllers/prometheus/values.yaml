@@ -1,0 +1,19 @@
+alertmanager:
+  enabled: true
+
+grafana:
+  enabled: true
+
+prometheus:
+  prometheusSpec:
+    retention: 14d
+    resources:
+      requests:
+        cpu: 200m
+        memory: 200Mi
+    podMonitorNamespaceSelector: { }
+    serviceMonitorNamespaceSelector: { }
+    podMonitorSelector:
+      matchLabels:
+        app.kubernetes.io/component: monitoring
+
