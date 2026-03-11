@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: backend-api
+spec:
+  namespaceSelector:
+    matchNames:
+      - backend-api
+  selector:
+    matchLabels:
+      app: backend-api
+  endpoints:
+    - port: http
