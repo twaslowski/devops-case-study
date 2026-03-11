@@ -13,7 +13,11 @@ prometheus:
         memory: 200Mi
     podMonitorNamespaceSelector: { }
     serviceMonitorNamespaceSelector: { }
+    serviceMonitorSelectorNilUsesHelmValues: false
     podMonitorSelector:
       matchLabels:
         app.kubernetes.io/component: monitoring
+  serviceMonitor:
+    selfMonitor: false
+  additionalServiceMonitors: [ ]
 
