@@ -12,6 +12,7 @@ configMapGenerator:
       - dashboards/cluster.json
       - dashboards/logs.json
       - dashboards/backend-api.json
+      - dashboards/ml-api.json
     options:
       labels:
         grafana_dashboard: "1"

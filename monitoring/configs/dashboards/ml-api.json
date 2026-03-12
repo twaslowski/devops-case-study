@@ -109,13 +109,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum by(status) (rate(backend_api_requests_total[5m])) * 300",
+          "expr": "sum by(status) (rate(ml_api_requests_total[5m])) * 300",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "HTTP Statuses",
+      "title": "ML API Requests",
       "type": "timeseries"
     },
     {
@@ -204,13 +204,13 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate(backend_api_request_duration_seconds_sum[2m])) / sum(rate(backend_api_request_duration_seconds_count[2m])) * 1000",
-          "legendFormat": "__auto",
+          "expr": "sum(rate(ml_api_request_duration_seconds_sum[2m])) / sum(rate(ml_api_request_duration_seconds_count[2m])) * 1000",
+          "legendFormat": "Latency in ms",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Backend Latency",
+      "title": "ML API Latency",
       "type": "timeseries"
     },
     {
@@ -218,6 +218,7 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
+      "description": "Total number of ML predictions performed",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -231,7 +232,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -270,7 +271,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "none"
         },
         "overrides": []
       },
@@ -298,13 +300,13 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (pod) (backend_api_db_connections_active)",
+          "expr": "sum by (pod) (rate(ml_api_predictions_total[5m])) * 300",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Open DB Connections",
+      "title": "ML Predictions",
       "type": "timeseries"
     },
     {
@@ -364,7 +366,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -392,13 +395,13 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (pod) (rate(backend_api_db_queries_total[5m])) * 300",
+          "expr": "sum by (pod) (ml_api_memory_bytes)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "DB Queries",
+      "title": "ML Memory Consumption",
       "type": "timeseries"
     }
   ],
@@ -414,8 +417,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Backend API",
-  "uid": "adzmq8f",
-  "version": 1,
+  "title": "ML API",
+  "uid": "ad57f9b",
+  "version": 7,
   "weekStart": ""
 }
