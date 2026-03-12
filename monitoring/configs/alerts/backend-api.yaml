@@ -36,3 +36,28 @@ spec:
               Current error rate: {{ printf "%.2f" ($value * 100) }}%
             runbook_url: https://runbooks.example.com/backend-api/db-error-rate
             dashboard: http://localhost:3000/d/adzmq8f/backend-api?orgId=1&from=now-6h&to=now&timezone=browser&viewPanel=panel-4
+        - alert: BackendApiHighHttp500Rate
+          expr: |
+            (
+              sum by (namespace) (
+                rate(backend_api_requests_total{status="500"}[5m])
+              )
+              /
+              sum by (namespace) (
+                rate(backend_api_requests_total[5m])
+              )
+            ) > 0.01
+          for: 5m
+
+          labels:
+            severity: warning
+            service: backend-api
+            component: http
+
+          annotations:
+            summary: "High HTTP 500 error rate on backend API"
+            description: >
+              More than 1% of HTTP requests are returning 500 errors
+              in namespace {{ $labels.namespace }}.
+
+              Current error rate: {{ printf "%.2f" ($value * 100) }}%
