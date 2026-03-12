@@ -3,6 +3,8 @@ kind: PrometheusRule
 metadata:
   name: backend-api-alerts
   namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
 spec:
   groups:
     - name: backend-api.rules
