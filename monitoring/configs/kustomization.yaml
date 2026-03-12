@@ -5,6 +5,7 @@ resources:
   - flux-podmonitor.yaml
   - backend-api-servicemonitor.yaml
   - ml-api-servicemonitor.yaml
+  - alerts/backend-api.yaml
 configMapGenerator:
   - name: grafana-dashboards
     files:
