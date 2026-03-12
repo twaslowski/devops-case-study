@@ -33,7 +33,7 @@ spec:
             summary: "Backend API DB query error rate is high"
             description: >
               More than 10% of database queries are failing in namespace {{ $labels.namespace }}.
-              Current error rate: {{ printf "%.2f" ($value * 100) }}%
+              Current error rate: {{ printf "%.2f" }}%
             runbook_url: https://runbooks.example.com/backend-api/db-error-rate
             dashboard: http://localhost:3000/d/adzmq8f/backend-api?orgId=1&from=now-6h&to=now&timezone=browser&viewPanel=panel-4
         - alert: BackendApiHighHttp500Rate
@@ -57,7 +57,5 @@ spec:
           annotations:
             summary: "High HTTP 500 error rate on backend API"
             description: >
-              More than 1% of HTTP requests are returning 500 errors
-              in namespace {{ $labels.namespace }}.
-
-              Current error rate: {{ printf "%.2f" ($value * 100) }}%
+              More than 1% of HTTP requests are returning 500 errors in namespace {{ $labels.namespace }}.
+              Current error rate: {{ printf "%.2f" }}%
