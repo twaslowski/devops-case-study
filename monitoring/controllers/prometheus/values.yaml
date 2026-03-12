@@ -3,6 +3,7 @@ alertmanager:
 
 grafana:
   enabled: true
+  defaultDashboardsEnabled: false
 
 prometheus:
   prometheusSpec:
