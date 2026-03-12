@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: backend-api-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: backend-api.rules
+      interval: 1m
+      rules:
+        - alert: HighDbQueryErrorRate
+          expr: |
+            (
+              sum(rate(backend_api_db_queries_total{status="error"}[5m]))
+              /
+              sum(rate(backend_api_db_queries_total[5m]))
+            ) > 0.10
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High DB query error rate on backend API"
+            description: >
+              More than 10% of DB queries are failing.
+              Current error rate: {{ printf "%.2f" $value }}%

@@ -109,8 +109,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum by(status) (rate(ml_api_requests_total[5m])) * 300",
-          "legendFormat": "__auto",
+          "expr": "sum by(exported_endpoint, status) (rate(ml_api_requests_total{exported_endpoint!=\"/health\", exported_endpoint!=\"/ready\"}[5m])) * 300",
+          "legendFormat": "{{exported_endpoint}} {{status}}",
           "range": true,
           "refId": "A"
         }
@@ -205,7 +205,7 @@
         {
           "editorMode": "code",
           "expr": "sum(rate(ml_api_request_duration_seconds_sum[2m])) / sum(rate(ml_api_request_duration_seconds_count[2m])) * 1000",
-          "legendFormat": "Latency in ms",
+          "legendFormat": "Latency",
           "range": true,
           "refId": "A"
         }
@@ -419,6 +419,6 @@
   "timezone": "browser",
   "title": "ML API",
   "uid": "ad57f9b",
-  "version": 7,
+  "version": 1,
   "weekStart": ""
 }

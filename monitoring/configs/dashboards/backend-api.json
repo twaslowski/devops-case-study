@@ -25,6 +25,7 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
+      "description": "Statuses for endpoints excluding /health and /ready",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -109,8 +110,8 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum by(status) (rate(backend_api_requests_total[5m])) * 300",
-          "legendFormat": "__auto",
+          "expr": "sum by (exported_endpoint, status) (rate(backend_api_requests_total{exported_endpoint!=\"/health\", exported_endpoint!=\"/ready\"}[5m])) * 300",
+          "legendFormat": "{{exported_endpoint}} {{status}}",
           "range": true,
           "refId": "A"
         }
@@ -204,8 +205,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate(backend_api_request_duration_seconds_sum[2m])) / sum(rate(backend_api_request_duration_seconds_count[2m])) * 1000",
-          "legendFormat": "__auto",
+          "expr": "sum(rate(backend_api_request_duration_seconds_sum[2m])) / sum(rate(backend_api_request_duration_seconds_count{}[2m])) * 1000",
+          "legendFormat": "Latency",
           "range": true,
           "refId": "A"
         }
@@ -392,8 +393,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (pod) (rate(backend_api_db_queries_total[5m])) * 300",
-          "legendFormat": "__auto",
+          "expr": "sum by (status) (rate(backend_api_db_queries_total[5m])) * 300",
+          "legendFormat": "{{status}}",
           "range": true,
           "refId": "A"
         }
