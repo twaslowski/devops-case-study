@@ -5,23 +5,34 @@ metadata:
   namespace: monitoring
   labels:
     release: kube-prometheus-stack
+    app.kubernetes.io/component: alert-rules
+    app.kubernetes.io/part-of: backend-api
 spec:
   groups:
-    - name: backend-api.rules
+    - name: backend-api.database.rules
       interval: 1m
       rules:
-        - alert: HighDbQueryErrorRate
+        - alert: BackendApiHighDbQueryErrorRate
           expr: |
             (
-              sum(rate(backend_api_db_queries_total{status="error"}[5m]))
+              sum by (namespace) (
+                rate(backend_api_db_queries_total{status="error"}[5m])
+              )
               /
-              sum(rate(backend_api_db_queries_total[5m]))
+              sum by (namespace) (
+                rate(backend_api_db_queries_total[5m])
+              )
             ) > 0.10
           for: 5m
           labels:
             severity: warning
+            service: backend-api
+            component: database
+            namespace: monitoring
           annotations:
-            summary: "High DB query error rate on backend API"
+            summary: "Backend API DB query error rate is high"
             description: >
-              More than 10% of DB queries are failing.
-              Current error rate: {{ printf "%.2f" $value }}%
+              More than 10% of database queries are failing in namespace {{ $labels.namespace }}.
+              Current error rate: {{ printf "%.2f" ($value * 100) }}%
+            runbook_url: https://runbooks.example.com/backend-api/db-error-rate
+            dashboard: http://localhost:3000/d/adzmq8f/backend-api?orgId=1&from=now-6h&to=now&timezone=browser&viewPanel=panel-4

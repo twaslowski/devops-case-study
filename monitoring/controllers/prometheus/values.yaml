@@ -6,7 +6,7 @@ alertmanager:
 
     route:
       receiver: mock-webhook
-      group_by: [ 'alertname', 'namespace' ]
+      group_by: [ 'alertname', 'namespace', 'severity' ]
       group_wait: 30s
       group_interval: 5m
       repeat_interval: 12h
@@ -14,7 +14,7 @@ alertmanager:
     receivers:
       - name: mock-webhook
         webhook_configs:
-          - url: 'http://alerts.voize.de'
+          - url: 'https://alerts.voize.de'
             send_resolved: true
 
 
