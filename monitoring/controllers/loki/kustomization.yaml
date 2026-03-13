@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - release.yaml
+  - repository.yaml
 configMapGenerator:
   - name: loki-values
     files:
