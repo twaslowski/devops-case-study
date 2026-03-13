@@ -137,7 +137,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -205,10 +205,32 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(rate(backend_api_request_duration_seconds_sum[2m])) / sum(rate(backend_api_request_duration_seconds_count{}[2m])) * 1000",
-          "legendFormat": "Latency",
+          "expr": "sum by(exported_endpoint) (rate(backend_api_request_duration_seconds_sum[2m]))\n/\nsum by(exported_endpoint) (rate(backend_api_request_duration_seconds_count[2m]))\n* 1000",
+          "legendFormat": "avg",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(\n  0.9,\n  sum by(endpoint, le) (\n    rate(backend_api_request_duration_seconds_bucket[2m])\n  )\n) * 1000",
+          "legendFormat": "p90",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(\n  0.99,\n  sum by(endpoint, le) (\n    rate(backend_api_request_duration_seconds_bucket[2m])\n  )\n) * 1000",
+          "legendFormat": "p99",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Backend Latency",

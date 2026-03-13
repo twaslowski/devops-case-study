@@ -6,6 +6,7 @@ resources:
   - backend-api-servicemonitor.yaml
   - ml-api-servicemonitor.yaml
   - alerts/backend-api.yaml
+  - alerts/ml-api.yaml
 configMapGenerator:
   - name: grafana-dashboards
     files:
@@ -14,6 +15,7 @@ configMapGenerator:
       - dashboards/logs.json
       - dashboards/backend-api.json
       - dashboards/ml-api.json
+      - dashboards/namespaces.json
     options:
       labels:
         grafana_dashboard: "1"

@@ -1,106 +1,104 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: backend-api-alerts
+  name: ml-api-alerts
   namespace: monitoring
   labels:
     release: kube-prometheus-stack
     app.kubernetes.io/component: alert-rules
-    app.kubernetes.io/part-of: backend-api
+    app.kubernetes.io/part-of: ml-api
 spec:
   groups:
-    - name: backend-api.database.rules
+    - name: ml-api.rules
       interval: 1m
       rules:
-        - alert: BackendApiHighHttp500Rate
+        - alert: MlApiHighHttp500Rate
           expr: |
             (
               sum by (namespace) (
-                rate(backend_api_requests_total{status="500"}[5m])
+                rate(ml_api_requests_total{status="500"}[5m])
               )
               /
               sum by (namespace) (
-                rate(backend_api_requests_total[5m])
+                rate(ml_api_requests_total[5m])
               )
             ) > 0.05
           for: 5m
 
           labels:
             severity: warning
-            service: backend-api
+            service: ml-api
             component: http
 
           annotations:
-            summary: "High HTTP 500 error rate on backend API"
+            summary: "High HTTP 500 error rate on ML API"
             description: >
               More than 5% of HTTP requests are returning 500 errors in namespace {{ $labels.namespace }}.
-              Current error rate: {{ printf "%.2f" }}%
+              Current error rate: {{ printf "%.2f" $value }}%
 
-        - alert: BackendApiHighLatency
+        - alert: MlApiHighLatency
           expr: |
             histogram_quantile(0.90,
               sum by (le, namespace) (
-                rate(backend_api_request_duration_seconds_bucket[5m])
+                rate(ml_api_request_duration_seconds_bucket[5m])
               )
             ) > 1
           for: 5m
 
           labels:
             severity: warning
-            service: backend-api
+            service: ml-api
             component: http
 
           annotations:
-            summary: "High latency on backend API"
+            summary: "High latency on ML API"
             description: >
               p90 latency is above 1s for more than 5 minutes in namespace {{ $labels.namespace }}.
               Current p90 latency: {{ printf "%.2f" $value }}s
 
-        - alert: BackendApiSharpDropInRequests
+        - alert: MlApiSharpDropInRequests
           expr: |
             (
               sum by (namespace) (
-                rate(backend_api_requests_total[5m])
+                rate(ml_api_requests_total[5m])
               )
               /
               sum by (namespace) (
-                rate(backend_api_requests_total[5m] offset 5m)
+                rate(ml_api_requests_total[5m] offset 5m)
               )
             ) < 0.5
           for: 2m
 
           labels:
             severity: critical
-            service: backend-api
+            service: ml-api
             component: http
 
           annotations:
-            summary: "Sharp drop in requests to backend API"
+            summary: "Sharp drop in requests to ML API"
             description: >
               More than 50% drop in inbound requests compared to the previous 5 minutes in namespace {{ $labels.namespace }}.
               This could indicate DNS or networking issues.
               Current drop: {{ printf "%.2f" $value }}%
 
-        - alert: BackendApiHighDatabaseErrors
+        - alert: MlApiHighMemoryUsage
           expr: |
             (
-              sum by (namespace) (
-                rate(backend_api_db_queries_total{status="error"}[5m])
-              )
+              ml_api_memory_bytes
               /
-              sum by (namespace) (
-                rate(backend_api_db_queries_total[5m])
-              )
-            ) > 0.10
+              on (namespace, pod) group_left()
+              kube_pod_container_resource_limits{resource="memory", unit="byte"}
+            ) > 0.80
           for: 5m
 
           labels:
-            severity: critical
-            service: backend-api
-            component: database
+            severity: warning
+            service: ml-api
+            component: memory
 
           annotations:
-            summary: "High database error rate on backend API"
+            summary: "High memory usage on ML API"
             description: >
-              More than 10% of database queries are failing in namespace {{ $labels.namespace }}.
-              Current error rate: {{ printf "%.2f" $value }}%
+              Memory usage is more than 80% of memory limit for more than 5 minutes in namespace {{ $labels.namespace }}.
+              Current memory usage: {{ printf "%.2f" $value }}%
+

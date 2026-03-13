@@ -3,7 +3,6 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -16,6 +15,7 @@
           "uid": "grafana"
         },
         "enable": true,
+        "hide": false,
         "iconColor": "red",
         "name": "flux events",
         "target": {
@@ -32,16 +32,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "decimals": 0,
@@ -52,7 +49,7 @@
             "steps": [
               {
                 "color": "blue",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -76,6 +73,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -83,10 +81,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -111,7 +111,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "decimals": 0,
@@ -122,7 +121,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -142,6 +141,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -149,10 +149,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -177,7 +179,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "decimals": 0,
@@ -188,7 +189,7 @@
             "steps": [
               {
                 "color": "blue",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -212,6 +213,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -219,10 +221,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -247,7 +251,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "decimals": 0,
@@ -258,7 +261,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -278,6 +281,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "last"
@@ -285,10 +289,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "value"
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -309,8 +315,9 @@
       "type": "stat"
     },
     {
-      "datasource": "${DS_PROMETHEUS}",
-      "description": "",
+      "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -319,7 +326,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -344,8 +351,16 @@
       "id": 8,
       "options": {
         "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
         "minVizHeight": 10,
         "minVizWidth": 0,
+        "namePlacement": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -355,10 +370,11 @@
           "values": false
         },
         "showUnfilled": true,
+        "sizing": "auto",
         "text": {},
         "valueMode": "color"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -372,8 +388,9 @@
       "type": "bargauge"
     },
     {
-      "datasource": "${DS_PROMETHEUS}",
-      "description": "",
+      "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -382,7 +399,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -407,8 +424,16 @@
       "id": 31,
       "options": {
         "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
         "minVizHeight": 10,
         "minVizWidth": 0,
+        "namePlacement": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -418,10 +443,11 @@
           "values": false
         },
         "showUnfilled": true,
+        "sizing": "auto",
         "text": {},
         "valueMode": "color"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "exemplar": true,
@@ -436,7 +462,6 @@
     },
     {
       "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -453,7 +478,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {
@@ -462,6 +486,9 @@
               "type": "auto"
             },
             "filterable": true,
+            "footer": {
+              "reducers": []
+            },
             "inspect": false
           },
           "mappings": [
@@ -486,7 +513,7 @@
             "steps": [
               {
                 "color": "transparent",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -518,14 +545,6 @@
       "id": 33,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true,
         "sortBy": [
           {
@@ -534,7 +553,7 @@
           }
         ]
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -629,7 +648,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -641,6 +659,9 @@
               "type": "auto"
             },
             "filterable": true,
+            "footer": {
+              "reducers": []
+            },
             "inspect": false
           },
           "mappings": [
@@ -665,7 +686,7 @@
             "steps": [
               {
                 "color": "transparent",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -716,14 +737,6 @@
       "id": 34,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true,
         "sortBy": [
           {
@@ -732,7 +745,7 @@
           }
         ]
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -827,7 +840,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -839,6 +851,9 @@
               "type": "auto"
             },
             "filterable": true,
+            "footer": {
+              "reducers": []
+            },
             "inspect": false
           },
           "mappings": [],
@@ -847,7 +862,7 @@
             "steps": [
               {
                 "color": "transparent",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -879,14 +894,6 @@
       "id": 36,
       "options": {
         "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
         "showHeader": true,
         "sortBy": [
           {
@@ -895,7 +902,7 @@
           }
         ]
       },
-      "pluginVersion": "10.1.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -984,7 +991,6 @@
     },
     {
       "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -997,8 +1003,9 @@
       "type": "row"
     },
     {
-      "datasource": "${DS_PROMETHEUS}",
-      "description": "",
+      "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1039,8 +1046,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1119,7 +1125,6 @@
         {
           "exemplar": true,
           "expr": "sum(rate(gotk_reconcile_duration_seconds_sum{namespace=~\"$operator_namespace\",exported_namespace=~\"$namespace\",kind=~\"Kustomization|HelmRelease\"}[5m])) by (kind, name)\n/\n  sum(rate(gotk_reconcile_duration_seconds_count{namespace=~\"$operator_namespace\",exported_namespace=~\"$namespace\",kind=~\"Kustomization|HelmRelease\"}[5m])) by (kind, name)",
-          "hide": false,
           "interval": "",
           "legendFormat": "{{kind}}/{{name}}",
           "refId": "B"
@@ -1129,8 +1134,9 @@
       "type": "timeseries"
     },
     {
-      "datasource": "${DS_PROMETHEUS}",
-      "description": "",
+      "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1171,8 +1177,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1251,7 +1256,6 @@
         {
           "exemplar": true,
           "expr": "sum(rate(gotk_reconcile_duration_seconds_sum{namespace=~\"$operator_namespace\",exported_namespace=~\"$namespace\",kind=~\"GitRepository|HelmRepository|Bucket|OCIRepository\"}[5m])) by (kind, name)\n/\n  sum(rate(gotk_reconcile_duration_seconds_count{namespace=~\"$operator_namespace\",exported_namespace=~\"$namespace\",kind=~\"GitRepository|HelmRepository|Bucket|OCIRepository\"}[5m])) by (kind, name)",
-          "hide": false,
           "interval": "",
           "legendFormat": "{{kind}}/{{name}}",
           "refId": "B"
@@ -1261,21 +1265,17 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "30s",
-  "schemaVersion": 38,
-  "style": "light",
+  "schemaVersion": 42,
   "tags": [
     "flux"
   ],
   "templating": {
     "list": [
       {
-        "allValue": "",
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
+          "text": "All",
           "value": [
             "$__all"
           ]
@@ -1285,7 +1285,6 @@
           "uid": "$DS_PROMETHEUS"
         },
         "definition": "label_values(gotk_resource_info, exported_namespace)",
-        "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "operator_namespace",
@@ -1296,20 +1295,13 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
+        "regexApplyTo": "value",
         "sort": 5,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
+          "text": "All",
           "value": [
             "$__all"
           ]
@@ -1319,7 +1311,6 @@
           "uid": "$DS_PROMETHEUS"
         },
         "definition": "label_values(gotk_resource_info,exported_namespace)",
-        "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "namespace",
@@ -1330,30 +1321,21 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "regexApplyTo": "value",
+        "type": "query"
       },
       {
         "current": {
-          "selected": false,
           "text": "Prometheus",
-          "value": "Prometheus"
+          "value": "prometheus"
         },
-        "hide": 0,
         "includeAll": false,
         "label": "Datasource",
-        "multi": false,
         "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "type": "datasource"
       }
     ]
@@ -1375,9 +1357,9 @@
       "1d"
     ]
   },
-  "timezone": "",
+  "timezone": "browser",
   "title": "Flux Cluster Stats",
   "uid": "flux-cluster",
-  "version": 4,
+  "version": 2,
   "weekStart": ""
 }
