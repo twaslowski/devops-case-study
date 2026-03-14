@@ -19,7 +19,10 @@ loki:
     enable_api: true
 
 minio:
-  enabled: true
+  enabled: false
+
+chunksCache:
+  enabled: false
 
 deploymentMode: SingleBinary
 
