@@ -21,6 +21,11 @@ alertmanager:
 grafana:
   enabled: true
   defaultDashboardsEnabled: false
+  sidecar:
+    datasources:
+      enabled: true
+      label: grafana_datasource
+      searchNamespace: monitoring
 
 prometheus:
   prometheusSpec:
