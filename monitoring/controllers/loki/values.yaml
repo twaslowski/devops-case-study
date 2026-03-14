@@ -1,4 +1,5 @@
 loki:
+  auth_enabled: false
   commonConfig:
     replication_factor: 1
   schemaConfig:
@@ -19,7 +20,7 @@ loki:
     enable_api: true
 
 minio:
-  enabled: false
+  enabled: true
 
 chunksCache:
   enabled: false
